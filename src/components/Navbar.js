@@ -10,7 +10,7 @@ export class NavBar extends Component {
     render() {
         return (
             <AppBar position="fixed">
-                <Toolbar>
+                <Toolbar className="toolbar">
                     <Button color="inherit" component={Link} to="/login">Login</Button>
                     <Button color="inherit" component={Link} to="/">Home</Button>
                     <Button color="inherit" component={Link} to="/signup">Signup</Button>
