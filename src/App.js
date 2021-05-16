@@ -25,8 +25,15 @@ const theme = createMuiTheme({
       main: '#33691e',
       dark: '#003d00',
       contrastText: '#000000'
-    }
+    },
   },
+  overrides: {
+    MuiButton: {
+      containedSecondary: {
+        color: '#ffffff'
+      }
+    }
+  }
 
 })
 
