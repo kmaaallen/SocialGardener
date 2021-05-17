@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 //mui components
@@ -10,6 +9,10 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
+//Redux
+import { connect } from 'react-redux';
+import { loginUser } from '../redux/actions/userActions';
 
 const styles = theme => ({
     ...theme.classes
@@ -21,36 +24,29 @@ class login extends Component {
         this.state = {
             email: '',
             password: '',
-            loading: false,
             errors: {}
         }
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.UI.errors) {
+            this.setState({
+                errors: nextProps.UI.errors
+            });
+        }
+
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.setState({
-            loading: true
-        });
         const userData = {
             email: this.state.email,
             password: this.state.password
         }
-
-        axios.post('/login', userData)
-        .then(response => {
-            localStorage.setItem('FBIdToken', `Bearer ${response.data.token}`);
-            this.setState({
-                loading: false
-            });
-            this.props.history.push('/');
-        })
-        .catch(error => {
-            this.setState({
-                errors: error.response.data,
-                loading: false
-            })
-        })
-
+        this.props.loginUser(userData, this.props.history);
     }
 
     handleChange = (event) => {
@@ -60,8 +56,8 @@ class login extends Component {
     }
 
     render() {
-        const { classes } = this.props;
-        const { errors, loading } = this.state;
+        const { classes, UI: { loading } } = this.props;
+        const { errors } = this.state;
         return (
             <Grid container className={classes.form}>
                 <Grid item sm />
@@ -90,16 +86,16 @@ class login extends Component {
                             value={this.state.password}
                             onChange={this.handleChange}
                             fullWidth />
-                            {errors.general && (<Typography variant="body2" className={classes.generalError}>{errors.general}</Typography>)}
+                        {errors.general && (<Typography variant="body2" className={classes.generalError}>{errors.general}</Typography>)}
                         <Button
                             type="submit"
                             variant="contained"
                             color="secondary"
                             className={classes.button}
                             disabled={loading}>
-                                Login
+                            Login
                                 {loading && (<CircularProgress size={20} className={classes.loader} color="secondary" />)}
-                                </Button>
+                        </Button>
                     </form>
                     <p className={classes.signUpText}>Don't have an account? <Link to="/signup" className={classes.signUpLink}>Sign up here</Link></p>
                 </Grid>
@@ -110,7 +106,19 @@ class login extends Component {
 }
 
 login.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    loginUser: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
+    UI: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(login);
+const mapStateToProps = (state) => ({
+    user: state.user,
+    UI: state.UI
+});
+
+const mapActionsToProps = {
+    loginUser
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(login));
