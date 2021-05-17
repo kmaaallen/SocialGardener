@@ -33,8 +33,44 @@ const theme = createMuiTheme({
         color: '#ffffff'
       }
     }
-  }
+  },
+  classes: {
+    form: {
+      textAlign: 'center',
+    },
 
+    pageTitle: {
+      margin: '15px 0px',
+    },
+
+    textField: {
+      margin: '15px 0px',
+    },
+
+    button: {
+      marginTop: '15px',
+      position: 'relative'
+    },
+
+    loader: {
+      position: 'absolute',
+    },
+
+    generalError: {
+      color: 'red',
+      fontSize: '0.8em'
+    },
+
+    signUpText: {
+      marginTop: '15px',
+      fontSize: '0.8em'
+    },
+
+    signUpLink: {
+      color: '#33691e',
+      textDecoration: "underline"
+    }
+  }
 })
 
 function App() {
