@@ -37,7 +37,6 @@ class login extends Component {
                 errors: nextProps.UI.errors
             });
         }
-
     }
 
     handleSubmit = (event) => {
