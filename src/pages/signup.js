@@ -43,13 +43,15 @@ class signup extends Component {
         this.props.signUpUser(newUserData, this.props.history);
     };
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.UI.errors) {
-            this.setState({
-                errors: nextProps.UI.errors
-            });
+    static getDerivedStateFromProps(props, state) {
+        if (props.UI.errors) {
+            return {
+                errors: props.UI.errors
+            };
         }
+        return null;
     }
+
 
     handleChange = (event) => {
         this.setState({
@@ -88,7 +90,7 @@ class signup extends Component {
                             value={this.state.password}
                             onChange={this.handleChange}
                             fullWidth />
-                            <TextField
+                        <TextField
                             id="confirmPassword"
                             name="confirmPassword"
                             label="Confirm Password"
@@ -99,7 +101,7 @@ class signup extends Component {
                             value={this.state.confirmPassword}
                             onChange={this.handleChange}
                             fullWidth />
-                            <TextField
+                        <TextField
                             id="userName"
                             name="userName"
                             label="User Name"
@@ -110,16 +112,16 @@ class signup extends Component {
                             value={this.state.userName}
                             onChange={this.handleChange}
                             fullWidth />
-                            {errors.general && (<Typography variant="body2" className={classes.generalError}>{errors.general}</Typography>)}
+                        {errors.general && (<Typography variant="body2" className={classes.generalError}>{errors.general}</Typography>)}
                         <Button
                             type="submit"
                             variant="contained"
                             color="secondary"
                             className={classes.button}
                             disabled={loading}>
-                                Sign Up
+                            Sign Up
                                 {loading && (<CircularProgress size={20} className={classes.loader} color="secondary" />)}
-                                </Button>
+                        </Button>
                     </form>
                     <p className={classes.signUpText}>Already have an account? <Link to="/login" className={classes.signUpLink}>Login here</Link></p>
                 </Grid>
