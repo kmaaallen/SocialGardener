@@ -9,44 +9,65 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import MuiLink from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
 
 //Icons
 import LocationOn from '@material-ui/icons/LocationOn';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 
 //Redux
 import { connect } from 'react-redux';
 
 const styles = {
     image: {
-        height: '200px',
-        width: '200px'
-    }
+        height: '100px',
+        width: '100px'
+    },
+
+    profile: {
+        textAlign: 'center',
+    },
+
+    padding: {
+        padding: '15px'
+    },
     //TODO
     //TODO - USER LINK
 };
 
 export class Profile extends Component {
     render() {
-        const { classes, user: { credentials: { userName, created, imageUrl,  bio, location },
+        const { classes, user: { credentials: { userName, created, imageUrl, bio, location },
             loading, authenticated } } = this.props;
 
         let profileMarkup = !loading ? (authenticated ? (
             <Paper>
-                <div>
-                    <div>
+                <div className={classes.profile}>
+                    <div className={classes.padding}>
                         <img className={classes.image} src={imageUrl} alt="user profile image"></img>
                     </div>
-                    <MuiLink component={Link} href='#'>{userName}</MuiLink>
-                    <hr />
-                    {bio && <Typography variant="body2">{bio}</Typography>}
-                    <hr />
+                    <MuiLink component={Link} to='#'>{userName}</MuiLink>
+                    {bio && <Typography variant="body2" className={classes.padding}>{bio}</Typography>}
                     {location && (
-                        <Fragment>
-                            <LocationOn color="primary" /> <span>{location}</span>
-                            <hr />
-                        </Fragment>
+                        <Grid container>
+                            <Grid item xs={4}>
+                                <LocationOn color="primary" />
+                            </Grid>
+                            <Grid item xs={8}>
+                                <Typography variant="body2" align="left">{location}</Typography>
+                            </Grid>
+                        </Grid>
+
                     )}
-                    <div>Joined: {dayjs(created).format('MMM YYYY')}</div>
+                    <Grid container>
+                        <Grid item xs={4}>
+                            <CalendarTodayIcon color="primary" />
+                        </Grid>
+                        <Grid item xs={8}>
+                            <Typography variant="body2" align="left">Joined: {dayjs(created).format('MMM YYYY')}</Typography>
+                        </Grid>
+                    </Grid>
+
                 </div>
 
             </Paper>
