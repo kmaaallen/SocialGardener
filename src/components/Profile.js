@@ -21,16 +21,28 @@ import { connect } from 'react-redux';
 const styles = {
     image: {
         height: '100px',
-        width: '100px'
+        width: '100px',
+        marginTop: '20%'
     },
 
-    profile: {
+    bio: {
         textAlign: 'center',
     },
 
     padding: {
         padding: '15px'
     },
+
+    button: {
+        margin: '15px'
+    },
+
+    body2: {
+        fontSize: '0.875rem',
+        verticalAlign: 'super',
+        paddingLeft: '10px'
+    }
+
     //TODO
     //TODO - USER LINK
 };
@@ -42,41 +54,43 @@ export class Profile extends Component {
 
         let profileMarkup = !loading ? (authenticated ? (
             <Paper>
-                <div className={classes.profile}>
-                    <div className={classes.padding}>
+                <Grid container>
+                    <Grid item>
                         <img className={classes.image} src={imageUrl} alt="user profile image"></img>
-                    </div>
-                    <MuiLink component={Link} to='#'>{userName}</MuiLink>
-                    {bio && <Typography variant="body2" className={classes.padding}>{bio}</Typography>}
-                    {location && (
-                        <Grid container>
-                            <Grid item xs={4}>
-                                <LocationOn color="primary" />
+                    </Grid>
+                    <Grid item xs={12} sm container className={classes.padding}>
+                        <Grid item xs container direction="column" spacing={2}>
+                            <Grid item>
+                                <MuiLink component={Link} to='#'>{userName}</MuiLink>
                             </Grid>
-                            <Grid item xs={8}>
-                                <Typography variant="body2" align="left">{location}</Typography>
-                            </Grid>
-                        </Grid>
+                            {location && (
+                                <Grid item>
+                                    <LocationOn color="primary" />
+                                    <span className={classes.body2}>{location}</span>
+                                    <br />
+                                </Grid>
+                            )}
 
-                    )}
-                    <Grid container>
-                        <Grid item xs={4}>
-                            <CalendarTodayIcon color="primary" />
-                        </Grid>
-                        <Grid item xs={8}>
-                            <Typography variant="body2" align="left">Joined: {dayjs(created).format('MMM YYYY')}</Typography>
+                            <Grid item>
+                                <CalendarTodayIcon color="primary" />
+                                <span className={classes.body2}>Joined: {dayjs(created).format('MMM YYYY')}</span>
+                            </Grid>
                         </Grid>
                     </Grid>
+                    <Grid item xs={12} className={classes.bio}>
+                    {bio && <Typography variant="body2" className={classes.padding}>{bio}</Typography>}
 
-                </div>
+                </Grid>
+                </Grid>
+                
 
             </Paper>
         ) : (
-            <Paper>
-                <Typography variant="body2" align="center">No profile found. Please login again.</Typography>
-                <div>
-                    <Button variant="contained" color="primary" component={Link} to="/login">Login</Button>
-                    <Button variant="contained" color="secondary" component={Link} to="/signup">Sign Up</Button>
+            <Paper className={classes.padding}>
+                <Typography variant="body2" align="center">No profile found. Please login or sign up.</Typography>
+                <div className={classes.profile}>
+                    <Button className={classes.button} variant="contained" color="primary" component={Link} to="/login">Login</Button>
+                    <Button className={classes.button} variant="contained" color="secondary" component={Link} to="/signup">Sign Up</Button>
                 </div>
             </Paper>
         )) : (<p>Loading...</p>);
