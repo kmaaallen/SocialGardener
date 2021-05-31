@@ -4,6 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import EditDetails from './EditDetails';
+import TooltipIconButton from '../util/TooltipIconButton';
 
 //MUI stuff
 import Button from '@material-ui/core/Button';
@@ -11,8 +12,6 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import MuiLink from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
 
 //Icons
 import LocationOn from '@material-ui/icons/LocationOn';
@@ -91,11 +90,12 @@ export class Profile extends Component {
                     <Grid item xs={12}>
                         <img className={classes.image} src={imageUrl} alt="user profile image"></img>
                         <input type="file" id="imageUpload" hidden="hidden" onChange={this.handleImageChange} />
-                        <Tooltip title="Upload profile picture" placement="top">
-                            <IconButton className={classes.editButton} onClick={this.handleEditImage}>
-                                <AddAPhoto color="primary" />
-                            </IconButton>
-                        </Tooltip>
+                        <TooltipIconButton
+                            tip="Upload profile picture"
+                            btnClass={classes.editButton}
+                            onclick={this.handleEditImage}>
+                            <AddAPhoto color="primary" />
+                        </TooltipIconButton>
                     </Grid>
                     <Grid item xs={12} sm container className={classes.padding}>
                         <Grid item xs container direction="column" spacing={2}>
@@ -120,11 +120,12 @@ export class Profile extends Component {
                         {bio && <Typography variant="body2" className={classes.padding}>{bio}</Typography>}
                     </Grid>
                     <Grid item xs={12}>
-                        <Tooltip title="Logout" placement="top">
-                            <IconButton onClick={logoutUser} className={classes.left}>
-                                <ExitToAppIcon color="primary"/>
-                            </IconButton>
-                        </Tooltip>
+                        <TooltipIconButton
+                            tip="Logout"
+                            btnClass={classes.left}
+                            onclick={logoutUser}>
+                            <ExitToAppIcon color="primary" />
+                        </TooltipIconButton>
                         <EditDetails />
                     </Grid>
                 </Grid>

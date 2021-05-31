@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
+import TooltipIconButton from '../util/TooltipIconButton';
 
 //MUI stuff
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -32,7 +31,7 @@ class EditDetails extends Component {
         open: false
     }
     //TODO: WHY TWO CREDENTIALS IN USER
-    
+
     mapUserDetailsToState = (details) => {
         this.setState({
             bio: details.bio ? details.bio : '',
@@ -76,40 +75,41 @@ class EditDetails extends Component {
         const { classes } = this.props;
         return (
             <Fragment>
-                <Tooltip title="Edit Details" placement="top">
-                    <IconButton onClick={this.handleOpen} className={classes.right}>
-                        <Edit color="primary" />
-                    </IconButton>
-                </Tooltip>
+                <TooltipIconButton
+                    tip="Edit Details"
+                    btnClass={classes.right}
+                    onclick={this.handleOpen}>
+                    <Edit color="primary" />
+                </TooltipIconButton>
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="sm">
-                <DialogTitle>Edit your details</DialogTitle>
-                <DialogContent>
-                    <form>
-                        <TextField 
-                        name="bio" 
-                        type="text" 
-                        label="Bio" 
-                        multiline 
-                        fullWidth
-                        placeholder="A short bio about yourself" 
-                        className={classes.textField}
-                        value={this.state.bio}
-                        onChange={this.handleChange}/>
-                         <TextField 
-                        name="location" 
-                        type="text" 
-                        label="Location" 
-                        fullWidth
-                        placeholder="Location" 
-                        className={classes.textField}
-                        value={this.state.location}
-                        onChange={this.handleChange}/>
-                    </form>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={this.handleClose} color="primary">Cancel</Button>
-                    <Button onClick={this.handleSave} color="primary">Save</Button>
-                </DialogActions>
+                    <DialogTitle>Edit your details</DialogTitle>
+                    <DialogContent>
+                        <form>
+                            <TextField
+                                name="bio"
+                                type="text"
+                                label="Bio"
+                                multiline
+                                fullWidth
+                                placeholder="A short bio about yourself"
+                                className={classes.textField}
+                                value={this.state.bio}
+                                onChange={this.handleChange} />
+                            <TextField
+                                name="location"
+                                type="text"
+                                label="Location"
+                                fullWidth
+                                placeholder="Location"
+                                className={classes.textField}
+                                value={this.state.location}
+                                onChange={this.handleChange} />
+                        </form>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">Cancel</Button>
+                        <Button onClick={this.handleSave} color="primary">Save</Button>
+                    </DialogActions>
                 </Dialog>
             </Fragment>
         )
