@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
@@ -29,7 +29,6 @@ if (token) {
   const decodedToken = jwtDecode(token);
   if (decodedToken.exp * 1000 < Date.now()) {
     store.dispatch(logoutUser);
-    window.location.href = '/login';
   } else {
     store.dispatch({ type: SET_AUTHENTICATED });
     axios.defaults.headers.common['Authorization'] = token;
