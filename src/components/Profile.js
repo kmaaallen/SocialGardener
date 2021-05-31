@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
+import EditDetails from './EditDetails';
 
 //MUI stuff
 import Button from '@material-ui/core/Button';
@@ -16,11 +17,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 //Icons
 import LocationOn from '@material-ui/icons/LocationOn';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import Edit from '@material-ui/icons/Edit';
+import AddAPhoto from '@material-ui/icons/AddAPhoto';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 //Redux
 import { connect } from 'react-redux';
-import { uploadImage } from '../redux/actions/userActions';
+import { uploadImage, logoutUser } from '../redux/actions/userActions';
 
 const styles = {
     image: {
@@ -53,6 +55,10 @@ const styles = {
         fontSize: '0.875rem',
         verticalAlign: 'super',
         paddingLeft: '10px'
+    },
+
+    left: {
+        float: 'left'
     }
 
     //TODO
@@ -76,7 +82,7 @@ export class Profile extends Component {
     }
 
     render() {
-        const { classes, user: { credentials: { userName, created, imageUrl, bio, location },
+        const { logoutUser, classes, user: { credentials: { userName, created, imageUrl, bio, location },
             loading, authenticated } } = this.props;
 
         let profileMarkup = !loading ? (authenticated ? (
@@ -87,7 +93,7 @@ export class Profile extends Component {
                         <input type="file" id="imageUpload" hidden="hidden" onChange={this.handleImageChange} />
                         <Tooltip title="Upload profile picture" placement="top">
                             <IconButton className={classes.editButton} onClick={this.handleEditImage}>
-                                <Edit color="primary" />
+                                <AddAPhoto color="primary" />
                             </IconButton>
                         </Tooltip>
                     </Grid>
@@ -112,16 +118,21 @@ export class Profile extends Component {
                     </Grid>
                     <Grid item xs={12} className={classes.bio}>
                         {bio && <Typography variant="body2" className={classes.padding}>{bio}</Typography>}
-
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Tooltip title="Logout" placement="top">
+                            <IconButton onClick={logoutUser} className={classes.left}>
+                                <ExitToAppIcon color="primary"/>
+                            </IconButton>
+                        </Tooltip>
+                        <EditDetails />
                     </Grid>
                 </Grid>
-
-
             </Paper>
         ) : (
             <Paper className={classes.padding}>
                 <Typography variant="body2" align="center">No profile found. Please login or sign up.</Typography>
-                <div className={classes.profile}>
+                <div className={classes.bio}>
                     <Button className={classes.button} variant="contained" color="primary" component={Link} to="/login">Login</Button>
                     <Button className={classes.button} variant="contained" color="secondary" component={Link} to="/signup">Sign Up</Button>
                 </div>
@@ -135,7 +146,8 @@ export class Profile extends Component {
 Profile.propTypes = {
     classes: PropTypes.object.isRequired,
     user: PropTypes.object,
-    uploadImage: PropTypes.func.isRequired
+    uploadImage: PropTypes.func.isRequired,
+    logoutUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -143,7 +155,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-    uploadImage
+    uploadImage,
+    logoutUser
 }
 
 
