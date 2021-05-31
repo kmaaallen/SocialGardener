@@ -9,7 +9,6 @@ import Button from '@material-ui/core/Button';
 
 //Redux
 import { connect } from 'react-redux';
-import { logoutUser } from '../redux/actions/userActions';
 
 export class NavBar extends Component {
     render() {
@@ -26,7 +25,6 @@ export class NavBar extends Component {
             <AppBar position="fixed">
                 <Toolbar className="toolbar">
                     <Button color="inherit" component={Link} to="/">Home</Button>
-                    <Button color="inherit" onClick={this.props.logoutUser}>Logout</Button>
                 </Toolbar>
             </AppBar>
         ) ;
@@ -43,8 +41,5 @@ const mapStateToProps = (state) => ({
     authenticated: state.user.authenticated
 })
 
-const mapActionsToProps = {
-    logoutUser
-}
 
-export default connect(mapStateToProps, mapActionsToProps)(NavBar);
+export default connect(mapStateToProps)(NavBar);
