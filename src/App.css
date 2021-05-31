@@ -11,8 +11,8 @@ body {
   max-width: 1200px;
 }
 
-.toolbar {
-  margin: auto;
+.toolbar svg {
+  color: #000000;
 }
 
 a {
