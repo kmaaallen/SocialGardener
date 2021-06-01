@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
-
-import axios from 'axios';
+import PropTypes from 'prop-types';
 
 //components
 import Post from '../components/Post';
 import Profile from '../components/Profile';
 
+//redux
+import { connect } from 'react-redux';
+import { getPosts } from '../redux/actions/dataActions';
+
 class home extends Component {
-    state = {
-        posts: null
+    constructor() {
+        super();
+        this.state= {
+            posts: null
+        }
     }
 
     componentDidMount(){
-        axios.get('/posts')
-        .then((response) => {
-            this.setState({
-                posts: response.data
-            })
-        })
-        .catch(error => {
-            console.log(error);
-        })
+        this.props.getPosts();
     }
 
     render() {
-        let recentPosts = this.state.posts ? (
-            this.state.posts.map((post) => <Post key={post.postId} post={post}/>)
+        const { posts, loading } = this.props.data;
+        let recentPosts = !loading ? (
+            posts.map((post) => <Post key={post.postId} post={post}/>)
         ) : <p>Loading ...</p>
         return (
             <Grid container spacing={3}>
@@ -41,4 +40,17 @@ class home extends Component {
     }
 }
 
-export default home
+home.propTypes = {
+    getPosts: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    data: state.data
+});
+
+const mapActionsToProps = {
+    getPosts
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(home);
