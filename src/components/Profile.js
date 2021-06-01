@@ -31,31 +31,24 @@ const styles = {
         objectFit: 'cover',
         marginTop: '15px'
     },
-
-
     bio: {
         textAlign: 'center',
     },
-
     padding: {
         padding: '15px'
     },
-
     button: {
         margin: '15px'
     },
-
     editButton: {
         verticalAlign: 'super',
         padding: 0
     },
-
     body2: {
         fontSize: '0.875rem',
         verticalAlign: 'super',
         paddingLeft: '10px'
     },
-
     left: {
         float: 'left'
     }
