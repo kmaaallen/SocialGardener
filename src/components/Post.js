@@ -5,6 +5,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import PropTypes from 'prop-types';
 import TooltipIconButton from '../util/TooltipIconButton';
 import { Link } from 'react-router-dom';
+import DeletePost from './DeletePost';
 
 //MUI stuff
 import Card from '@material-ui/core/Card';
@@ -31,11 +32,13 @@ const styles = {
         height: '150px',
         borderRadius: '50%',
         objectFit: 'cover',
-        marginTop: '15px'
+        marginTop: '15px',
+        marginLeft: '15px'
     },
     content: {
         padding: 25,
-        objectFit: 'cover'
+        objectFit: 'cover',
+        width: 'fill-available'
     }
 }
 
@@ -78,17 +81,20 @@ class Post extends Component {
                 <FavoriteBorderIcon color="primary" />
             </TooltipIconButton>
         )
-            
         )
+        const deleteButton = authenticated && userName === this.props.user.credentials.userName ? (
+            <DeletePost postId={postId} />
+        ) : null;
         return (
             <Card className={classes.card}>
                 <CardMedia
                     image={userImage}
                     title='Profile Image'
-                    className={classes.image} 
-                    component="img"/>
+                    className={classes.image}
+                    component="img" />
                 <CardContent className={classes.content}>
                     <Typography variant="h5" component={Link} to={`/users/${userName}`} color="primary">{userName}</Typography>
+                    {deleteButton}
                     <Typography variant="body2" color="textSecondary">{dayjs(created).fromNow()}</Typography>
                     <Typography variant="body1">{content}</Typography>
                     {likeButton}
