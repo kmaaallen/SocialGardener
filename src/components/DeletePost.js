@@ -28,8 +28,14 @@ const styles = {
 }
 
 class DeletePost extends Component {
-    state = {
-        open: false
+    constructor() {
+        super();
+        this.state = {
+            open: false
+        }
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.deletePost = this.deletePost.bind(this);
     }
 
     handleOpen = () => {
@@ -59,7 +65,7 @@ class DeletePost extends Component {
                     btnClass={classes.deleteButton}>
                     <DeleteOutlineIcon className={classes.red}/>
                 </TooltipIconButton>
-                <Dialog open={this.state.open} onclose={this.handleClose} fullWidth maxWidth="sm">
+                <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="sm">
                 <DialogTitle>Are you sure you want to delete this post?</DialogTitle>
                 <DialogActions>
                     <Button onClick={this.handleClose} color="primary">Cancel</Button>
