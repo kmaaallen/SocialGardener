@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
@@ -81,7 +81,7 @@ export class Profile extends Component {
             <Paper className={classes.bio}>
                 <Grid container>
                     <Grid item xs={12}>
-                        <img className={classes.image} src={imageUrl} alt="user profile image"></img>
+                        <img className={classes.image} src={imageUrl} alt="User profile"></img>
                         <input type="file" id="imageUpload" hidden="hidden" onChange={this.handleImageChange} />
                         <TooltipIconButton
                             tip="Upload profile picture"
