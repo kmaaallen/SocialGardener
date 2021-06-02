@@ -32,6 +32,7 @@ const styles = theme => ({
     closeButton: {
         position: 'absolute',
         left: '90%',
+        top: '5%'
     }
 });
 
@@ -48,13 +49,11 @@ class CreatePost extends Component {
         this.handleClose = this.handleClose.bind(this);
     }
 
-
     componentDidUpdate(prevProps) {
         if (prevProps.data.posts !== this.props.data.posts && this.state.open) {
             this.handleClose();
         }
     }
-
 
     handleOpen = () => {
         this.setState({
@@ -70,7 +69,6 @@ class CreatePost extends Component {
         })
     }
 
-
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
@@ -82,8 +80,6 @@ class CreatePost extends Component {
         this.props.createPost({ content: this.state.content });
 
     }
-
-
 
     render() {
         //const { errors } = this.state;
