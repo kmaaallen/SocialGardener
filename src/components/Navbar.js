@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
 import TooltipIconButton from '../util/TooltipIconButton';
+import CreatePost from './CreatePost';
 
 //Material UI
 import AppBar from '@material-ui/core/AppBar';
@@ -11,7 +12,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 //Icons
-import AddIcon from '@material-ui/icons/Add';
 import HomeIcon from '@material-ui/icons/Home';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 
@@ -36,7 +36,7 @@ export class NavBar extends Component {
             <AppBar position="fixed">
                 <Toolbar className="toolbar">
                     <Typography variant="h6" className={classes.header}>The Social Gardener</Typography>
-                    <Fragment className={classes.right}>
+                    <Fragment>
                         <Button color="inherit" component={Link} to="/">Home</Button>
                         <Button color="inherit" component={Link} to="/login">Login</Button>
                         <Button color="inherit" component={Link} to="/signup">Signup</Button>
@@ -47,10 +47,8 @@ export class NavBar extends Component {
             <AppBar position="fixed">
                 <Toolbar className="toolbar">
                     <Typography variant="h6" className={classes.header}>The Social Gardener</Typography>
-                    <Fragment className={classes.right}>
-                        <TooltipIconButton tip="Create Post">
-                            <AddIcon />
-                        </TooltipIconButton>
+                    <Fragment>
+                        <CreatePost />
                         <TooltipIconButton tip="Notifications">
                             <NotificationsIcon />
                         </TooltipIconButton>
