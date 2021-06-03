@@ -1,4 +1,4 @@
-import { SET_POSTS, LIKE_POST, UNLIKE_POST, LOADING_DATA, DELETE_POST, CREATE_POST, SET_POST } from '../types';
+import { SET_POSTS, LIKE_POST, UNLIKE_POST, LOADING_DATA, DELETE_POST, CREATE_POST, SET_POST, CREATE_COMMENT } from '../types';
 
 const initialState = {
     posts: [],
@@ -34,6 +34,14 @@ export const dataReducer = function(state = initialState, action) {
             }
         case SET_POST:
             return {...state, loading: false, post: action.payload};
+        case CREATE_COMMENT:
+            return {
+                ...state,
+                post: {
+                    ...state.post,
+                    comments: [action.payload, ...state.post.comments]
+                }
+            }
         default:
             return state;
     }
