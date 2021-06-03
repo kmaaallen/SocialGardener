@@ -5,11 +5,11 @@ import TooltipIconButton from '../util/TooltipIconButton';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import LikeButton from './LikeButton';
+import Comments from './Comments';
+import CreateComment from './CreateComment';
 
 //MUI stuff
-import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
@@ -26,10 +26,6 @@ import { getPost } from '../redux/actions/dataActions';
 
 const styles =  theme => ({
     ...theme.classes,
-    separator: {
-        border: 'none',
-        margin: 4
-    },
     image: {
         width: '180px',
         height: '180px',
@@ -78,14 +74,14 @@ class PostDialog extends Component {
 
     render() {
         const { classes,
-            post: { created, likeCount, commentCount, userName, userImage, content, postId },
+            post: { created, likeCount, commentCount, userName, userImage, content, postId, comments },
             UI: { loading } } = this.props;
         const dialogMarkup = loading ? (
             <div className={classes.spinnerDiv}>
                 <CircularProgress size={200} thickness={2}/>
             </div>
         ) : (
-            <Grid container xs={12} spacing={16}>
+            <Grid container>
                 <Grid item sm={5}>
                     <img src={userImage} alt="Profile" className={classes.image} />
                 </Grid>
@@ -93,11 +89,11 @@ class PostDialog extends Component {
                     <Typography component={Link} color="primary" variant="h5" to={`/users/${userName}`}>
                         @{userName}
                     </Typography>
-                    <hr className={classes.separator}/>
+                    <hr className={classes.invisibleSeparator}/>
                     <Typography variant="body2" color="textSecondary">
                         Created: {dayjs(created).format('h:mm a, MMMM DD YYYY')}
                     </Typography>
-                    <hr className={classes.separator}/>
+                    <hr className={classes.invisibleSeparator}/>
                     <Typography variant="body1">
                         {content}
                     </Typography>
@@ -108,6 +104,9 @@ class PostDialog extends Component {
                     </TooltipIconButton>
                     <span>{commentCount} comments</span>
                 </Grid>
+                <hr className={classes.visibleSeparator} />
+                <CreateComment postId={postId} />
+                <Comments comments={comments} />
             </Grid>
         )
         return (
