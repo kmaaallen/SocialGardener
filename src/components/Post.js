@@ -60,7 +60,7 @@ class Post extends Component {
                     className={classes.image}
                     component="img" />
                 <CardContent className={classes.content}>
-                    <Typography variant="h5" component={Link} to={`/users/${userName}`} color="primary">{userName}</Typography>
+                    <Typography variant="h5" component={Link} to={`/user/${userName}`} color="primary">{userName}</Typography>
                     {deleteButton}
                     <Typography variant="body2" color="textSecondary">{dayjs(created).fromNow()}</Typography>
                     <Typography variant="body1">{content}</Typography>
