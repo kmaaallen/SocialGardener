@@ -59,7 +59,7 @@ export const createComment = (postId, commentData) => (dispatch) => {
         dispatch(clearErrors());
     })
     .catch(error => {
-        dispatch({ type: SET_ERRORS, payload: error.data })
+        dispatch({ type: SET_ERRORS, payload: error.response.data })
         console.error(error);
     })
 }
