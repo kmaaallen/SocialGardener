@@ -104,3 +104,15 @@ export const getPost = (postId) => (dispatch) => {
 export const clearErrors = () => (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
 };
+
+export const getUserData = (userName) => (dispatch) => {
+    dispatch({ type: LOADING_DATA });
+    axios.get(`/user/${userName}`)
+    .then(response => {
+        dispatch({ type: SET_POSTS, payload: response.data.posts });
+    })
+    .catch(error => {
+        dispatch({ type: SET_POSTS, payload: null});
+        console.error(error);
+    })
+}
