@@ -12,7 +12,12 @@ import { connect } from 'react-redux';
 import { createComment } from '../redux/actions/dataActions';
 
 const styles = (theme) => ({
-    ...theme.classes
+    ...theme.classes,
+
+    button: {
+        float: 'right',
+        margin: '15px'
+    }
 })
 
 class CreateComment extends Component {
@@ -32,7 +37,7 @@ class CreateComment extends Component {
     }
 
     render() {
-        const { classes, UI: { errors, loading }, authenticated } = this.props;
+        const { classes, UI: { errors }, authenticated } = this.props;
         const commentFormMarkup = authenticated && (
             <Grid item sm={12}>
                 <form onSubmit={this.handleSubmit}>
@@ -41,7 +46,7 @@ class CreateComment extends Component {
                         type="text"
                         label="Comment on post"
                         error={errors ? true : false}
-                        helperText={errors ? errors.comment : ''}
+                        helperText={errors ? errors.comment : '' }
                         value={this.state.content}
                         onChange={this.handleChange}
                         fullWidth
