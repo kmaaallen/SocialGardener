@@ -4,6 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
 import TooltipIconButton from '../util/TooltipIconButton';
 import CreatePost from './CreatePost';
+import Notifications from './Notifications';
 
 //Material UI
 import AppBar from '@material-ui/core/AppBar';
@@ -13,7 +14,6 @@ import Typography from '@material-ui/core/Typography';
 
 //Icons
 import HomeIcon from '@material-ui/icons/Home';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 
 //Redux
 import { connect } from 'react-redux';
@@ -49,9 +49,7 @@ export class NavBar extends Component {
                     <Typography variant="h6" className={classes.header}>The Social Gardener</Typography>
                     <Fragment>
                         <CreatePost />
-                        <TooltipIconButton tip="Notifications">
-                            <NotificationsIcon />
-                        </TooltipIconButton>
+                        <Notifications />
                         <Link to="/">
                             <TooltipIconButton tip="Home">
                                 <HomeIcon />
