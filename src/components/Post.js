@@ -45,6 +45,7 @@ class Post extends Component {
     render() {
         dayjs.extend(relativeTime);
         const {
+            openDialog,
             classes,
             post: { content, created, userImage, userName, postId, likeCount, commentCount },
             user: { authenticated } } = this.props;
@@ -70,7 +71,7 @@ class Post extends Component {
                         <ChatIcon color="primary" />
                     </TooltipIconButton>
                     <span>{commentCount} comments</span>
-                    <PostDialog postId={postId} userName={userName}/>
+                    <PostDialog postId={postId} userName={userName} openDialog={openDialog}/>
                 </CardContent>
             </Card>
         )
@@ -80,7 +81,8 @@ class Post extends Component {
 Post.propTypes = {
     user: PropTypes.object,
     post: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    openDialog: PropTypes.bool
 }
 
 const mapStateToProps = (state) => ({
