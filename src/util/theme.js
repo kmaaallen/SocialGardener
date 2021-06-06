@@ -21,6 +21,46 @@ export const theme = {
     }
   },
   classes: {
+    skeletonCard: {
+      display: 'flex',
+      marginBottom: 15
+    },
+    skeletonContent: {
+      width: '100%',
+      flexDirection: 'column',
+      padding: 25
+    },
+    skeletonCover: {
+      minWidth: '150px',
+      minHeight: '150px',
+      borderRadius: '50%',
+      objectFit: 'cover',
+      margin: '15px',
+    },
+    skeletonUserName: {
+      width: '60px',
+      height: '15px',
+      backgroundColor: '#7cb342',
+      marginBottom: 7
+    },
+    skeletonCreated: {
+      width: '60px',
+      height: '10px',
+      backgroundColor: '#ccc',
+      marginBottom: 7
+    },
+    skeletonFullLine: {
+      width: '100%',
+      height: '20px',
+      backgroundColor: '#444',
+      marginBottom: 7
+    },
+    skeletonHalfLine: {
+      width: '50%',
+      height: '20px',
+      backgroundColor: '#444',
+      marginBottom: 7
+    },
     form: {
       textAlign: 'center',
     },

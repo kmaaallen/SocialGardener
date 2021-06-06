@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import EditDetails from './EditDetails';
 import TooltipIconButton from '../util/TooltipIconButton';
+import ProfileSkeleton from '../util/ProfileSkeleton';
 
 //MUI stuff
 import Button from '@material-ui/core/Button';
@@ -131,7 +132,7 @@ export class Profile extends Component {
                     <Button className={classes.button} variant="contained" color="secondary" component={Link} to="/signup">Sign Up</Button>
                 </div>
             </Paper>
-        )) : (<p>Loading...</p>);
+        )) : (<ProfileSkeleton />);
 
         return profileMarkup;
     }
