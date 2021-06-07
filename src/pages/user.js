@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Post from '../components/Post';
-import StaticProfile from '../components/StaticProfile';
+//Components
+import Post from '../components/Post/Post';
+import StaticProfile from '../components/Profile/StaticProfile';
 import PostSkeleton from '../util/PostSkeleton';
 import ProfileSkeleton from '../util/ProfileSkeleton';
-
 //MUI stuff
 import Grid from '@material-ui/core/Grid';
-
 //Redux stuff
 import { connect } from 'react-redux';
 import { getUserData } from '../redux/actions/dataActions';
@@ -22,7 +21,7 @@ class user extends Component {
         const user = this.props.match.params.userName;
         const postIdParam = this.props.match.params.postId;
 
-        if(postIdParam){
+        if (postIdParam) {
             this.setState({
                 postIdParam: postIdParam
             });
@@ -30,47 +29,47 @@ class user extends Component {
 
         this.props.getUserData(user);
         axios.get(`/user/${user}`)
-        .then(response => {
-            this.setState({
-                profile: response.data.user
+            .then(response => {
+                this.setState({
+                    profile: response.data.user
+                })
             })
-        })
-        .catch(error => {
-            console.error(error);
-        })
+            .catch(error => {
+                console.error(error);
+            })
     }
 
     render() {
-        const { posts, loading  } = this.props.data;
+        const { posts, loading } = this.props.data;
         const { postIdParam } = this.state;
         const postsMarkup = loading ? (
-        <PostSkeleton />
+            <PostSkeleton />
         ) : posts == null ? (
-        <p>This user has no posts</p>
+            <p>This user has no posts</p>
         ) : !postIdParam ? (
-            posts.map((post) => {return (<Post key={post.postId} post={post} />)})
+            posts.map((post) => { return (<Post key={post.postId} post={post} />) })
         ) : (
             posts.map((post) => {
-                if(post.postId !== postIdParam){
+                if (post.postId !== postIdParam) {
                     return (<Post key={post.postId} post={post} />)
-                }else{
-                    return (<Post key={post.postId} post={post} openDialog/>)
+                } else {
+                    return (<Post key={post.postId} post={post} openDialog />)
                 }
             })
         )
         return (
             <Grid container spacing={3}>
-            <Grid item sm={8} xs={12}>
-                {postsMarkup}
+                <Grid item sm={8} xs={12}>
+                    {postsMarkup}
+                </Grid>
+                <Grid item sm={4} xs={12}>
+                    {this.state.profile == null ? (
+                        <ProfileSkeleton />
+                    ) : (
+                        <StaticProfile profile={this.state.profile} />
+                    )}
+                </Grid>
             </Grid>
-            <Grid item sm={4} xs={12}>
-                {this.state.profile == null ? (
-                    <ProfileSkeleton />
-                ) : (
-                    <StaticProfile profile={this.state.profile} />
-                ) }
-            </Grid>
-        </Grid>
         )
     }
 }
@@ -85,7 +84,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapActionsToProps = {
-    getUserData 
+    getUserData
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(user)

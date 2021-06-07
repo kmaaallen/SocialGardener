@@ -1,15 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-
 //MUI stuff
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-
 //Redux stuff
 import { connect } from 'react-redux';
-import { createComment } from '../redux/actions/dataActions';
+import { createComment } from '../../redux/actions/dataActions';
 
 const styles = (theme) => ({
     ...theme.classes,
@@ -46,7 +44,7 @@ class CreateComment extends Component {
                         type="text"
                         label="Comment on post"
                         error={errors ? true : false}
-                        helperText={errors ? errors.comment : '' }
+                        helperText={errors ? errors.comment : ''}
                         value={this.state.content}
                         onChange={this.handleChange}
                         fullWidth

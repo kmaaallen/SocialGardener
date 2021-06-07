@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Link } from 'react-router-dom';
-
-//mui components
+//MUI stuff
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
 //Redux
 import { connect } from 'react-redux';
 import { loginUser } from '../redux/actions/userActions';
@@ -30,7 +28,7 @@ class login extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    
+
     static getDerivedStateFromProps(props, state) {
         if (props.UI.errors) {
             return {

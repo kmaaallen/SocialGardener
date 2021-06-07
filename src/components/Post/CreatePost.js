@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-import TooltipIconButton from '../util/TooltipIconButton';
-
+//Components
+import TooltipIconButton from '../../util/TooltipIconButton';
 //MUI stuff
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -10,14 +10,12 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
 //Icons
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
-
 //Redux stuff
 import { connect } from 'react-redux';
-import { createPost, clearErrors } from '../redux/actions/dataActions';
+import { createPost, clearErrors } from '../../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.classes,

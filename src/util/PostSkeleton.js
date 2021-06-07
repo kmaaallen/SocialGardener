@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import noImage from '../images/no-image.png';
 import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles'
-
 //MUI stuff
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';

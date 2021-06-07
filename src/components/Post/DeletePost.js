@@ -1,20 +1,18 @@
 import React, { Component, Fragment } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-import TooltipIconButton from '../util/TooltipIconButton';
-
+//Components
+import TooltipIconButton from '../../util/TooltipIconButton';
 //MUI stuff
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
-
 //Icons
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-
 //Redux stuff
 import { connect } from 'react-redux';
-import { deletePost } from '../redux/actions/dataActions';
+import { deletePost } from '../../redux/actions/dataActions';
 
 const styles = {
     deleteButton: {
@@ -22,7 +20,7 @@ const styles = {
         paddingRight: 0,
         float: "right"
     },
-    red : {
+    red: {
         color: "#8b0000"
     }
 }
@@ -63,14 +61,14 @@ class DeletePost extends Component {
                     tip="Delete post"
                     onclick={this.handleOpen}
                     btnClass={classes.deleteButton}>
-                    <DeleteOutlineIcon className={classes.red}/>
+                    <DeleteOutlineIcon className={classes.red} />
                 </TooltipIconButton>
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="sm">
-                <DialogTitle>Are you sure you want to delete this post?</DialogTitle>
-                <DialogActions>
-                    <Button onClick={this.handleClose} color="primary">Cancel</Button>
-                    <Button onClick={this.deletePost} className={classes.red}>Delete</Button>
-                </DialogActions>
+                    <DialogTitle>Are you sure you want to delete this post?</DialogTitle>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">Cancel</Button>
+                        <Button onClick={this.deletePost} className={classes.red}>Delete</Button>
+                    </DialogActions>
                 </Dialog>
             </Fragment>
         )

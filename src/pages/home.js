@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
-import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
-
-//components
-import Post from '../components/Post';
-import Profile from '../components/Profile';
+//Components
+import Post from '../components/Post/Post';
+import Profile from '../components/Profile/Profile';
 import PostSkeleton from '../util/PostSkeleton';
-
-//redux
+//MUI Stuff
+import Grid from '@material-ui/core/Grid';
+//Redux stuff
 import { connect } from 'react-redux';
 import { getPosts } from '../redux/actions/dataActions';
 
 class home extends Component {
     constructor() {
         super();
-        this.state= {
+        this.state = {
             posts: null
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.getPosts();
     }
 
     render() {
         const { posts, loading } = this.props.data;
         let recentPosts = !loading ? (
-            posts.map((post) => <Post key={post.postId} post={post}/>)
+            posts.map((post) => <Post key={post.postId} post={post} />)
         ) : <PostSkeleton />
         return (
             <Grid container spacing={3}>

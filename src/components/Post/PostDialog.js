@@ -1,30 +1,28 @@
 import React, { Component, Fragment } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
-import TooltipIconButton from '../util/TooltipIconButton';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
+//Components
+import TooltipIconButton from '../../util/TooltipIconButton';
 import LikeButton from './LikeButton';
 import Comments from './Comments';
 import CreateComment from './CreateComment';
-
 //MUI stuff
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-
 //Icons
 import CloseIcon from '@material-ui/icons/Close';
 import UnfoldMoreIcon from '@material-ui/icons/UnfoldMore';
 import ChatIcon from '@material-ui/icons/Chat';
-
 //Redux stuff
 import { connect } from 'react-redux';
-import { getPost, clearErrors } from '../redux/actions/dataActions';
+import { getPost, clearErrors } from '../../redux/actions/dataActions';
 
-const styles =  theme => ({
+const styles = theme => ({
     ...theme.classes,
     image: {
         width: '180px',
@@ -60,8 +58,8 @@ class PostDialog extends Component {
         this.handleClose = this.handleClose.bind(this);
     }
 
-    componentDidMount(){
-        if(this.props.openDialog) this.handleOpen();
+    componentDidMount() {
+        if (this.props.openDialog) this.handleOpen();
     }
 
     handleOpen = () => {
@@ -69,7 +67,7 @@ class PostDialog extends Component {
         const { userName, postId } = this.props;
         const newPath = `/user/${userName}/post/${postId}`;
 
-        if(oldPath === newPath) oldPath = `/users/${userName}`;
+        if (oldPath === newPath) oldPath = `/users/${userName}`;
 
         window.history.pushState(null, null, newPath);
         this.setState({ open: true, oldPath: oldPath, newPath: newPath });
@@ -94,7 +92,7 @@ class PostDialog extends Component {
             UI: { loading } } = this.props;
         const dialogMarkup = loading ? (
             <div className={classes.spinnerDiv}>
-                <CircularProgress size={200} thickness={2}/>
+                <CircularProgress size={200} thickness={2} />
             </div>
         ) : (
             <Grid container>
@@ -105,15 +103,15 @@ class PostDialog extends Component {
                     <Typography component={Link} color="primary" variant="h5" to={`/users/${userName}`}>
                         @{userName}
                     </Typography>
-                    <hr className={classes.invisibleSeparator}/>
+                    <hr className={classes.invisibleSeparator} />
                     <Typography variant="body2" color="textSecondary">
                         Created: {dayjs(created).format('h:mm a, MMMM DD YYYY')}
                     </Typography>
-                    <hr className={classes.invisibleSeparator}/>
+                    <hr className={classes.invisibleSeparator} />
                     <Typography variant="body1">
                         {content}
                     </Typography>
-                    <LikeButton postId={postId}/>
+                    <LikeButton postId={postId} />
                     <span>{likeCount} likes</span>
                     <TooltipIconButton tip="Comments">
                         <ChatIcon color="primary" />
@@ -128,7 +126,7 @@ class PostDialog extends Component {
         return (
             <Fragment>
                 <TooltipIconButton onclick={this.handleOpen} tip="Expand post" tipClass={classes.expandButton}>
-                    <UnfoldMoreIcon color="primary"/>
+                    <UnfoldMoreIcon color="primary" />
                 </TooltipIconButton>
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="sm">
                     <TooltipIconButton tip="Close" btnClass={classes.closeButton} onclick={this.handleClose}>

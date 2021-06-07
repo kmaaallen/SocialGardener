@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
 //MUI stuff
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -11,15 +10,13 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
-
 //Icons
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ChatIcon from '@material-ui/icons/Chat';
-
 //Redux stuff
 import { connect } from 'react-redux';
-import { markNotificationsRead } from '../redux/actions/userActions';
+import { markNotificationsRead } from '../../redux/actions/userActions';
 
 class Notifications extends Component {
     state = {
@@ -54,8 +51,8 @@ class Notifications extends Component {
         let notificationIcon;
 
         if (notifications && notifications.length > 0) {
-            (notifications.filter(notification => notification.read === false).length > 0) ? 
-            notificationIcon = (
+            (notifications.filter(notification => notification.read === false).length > 0) ?
+                notificationIcon = (
                     <Badge
                         badgeContent={notifications.filter(notification => notification.read === false).length}
                         color="error">

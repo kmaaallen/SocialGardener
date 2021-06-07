@@ -3,7 +3,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
-
 //MUI stuff
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -37,32 +36,32 @@ class Comments extends Component {
                             <Grid item sm={12}>
                                 <Grid container>
                                     <Grid item sm={2}>
-                                        <img src={userImage} alt="user" className={classes.commentImage}/>
+                                        <img src={userImage} alt="user" className={classes.commentImage} />
                                     </Grid>
                                     <Grid item sm={9}>
                                         <div className={classes.commentData}>
-                                            <Typography 
-                                            component={Link}
-                                            variant="h5"
-                                            to={`/user/${userName}`}
-                                            color="primary">
+                                            <Typography
+                                                component={Link}
+                                                variant="h5"
+                                                to={`/user/${userName}`}
+                                                color="primary">
                                                 {userName}
                                             </Typography>
                                             <Typography
-                                            variant="body2"
-                                            color="textSecondary">
+                                                variant="body2"
+                                                color="textSecondary">
                                                 {dayjs(created).format('h:mm a, MMMM DD YYYY')}
                                             </Typography>
                                             <hr className={classes.invisibleSeparator} />
                                             <Typography
-                                            variant="body1">
+                                                variant="body1">
                                                 {content}
                                             </Typography>
                                         </div>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            {index !== comments.length - 1 && (<hr className={classes.visibleSeparator}/>)}
+                            {index !== comments.length - 1 && (<hr className={classes.visibleSeparator} />)}
                         </Fragment>
                     )
                 })}
