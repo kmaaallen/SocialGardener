@@ -23,6 +23,7 @@ import { connect } from 'react-redux';
 import { uploadImage, logoutUser } from '../../redux/actions/userActions';
 
 const styles = theme => ({
+    ...theme.classes,
     editButton: {
         verticalAlign: 'super',
         padding: 0

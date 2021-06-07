@@ -38,7 +38,7 @@ const StaticProfile = (props) => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} className={classes.textAlignCenter}>
-                    {bio && <Typography variant="body2" className={classes.padding}>{bio}</Typography>}
+                    {bio && <Typography variant="body2" className={classes.padding15}>{bio}</Typography>}
                 </Grid>
             </Grid>
         </Paper>
