@@ -11,16 +11,12 @@ import { connect } from 'react-redux';
 import { getPosts } from '../redux/actions/dataActions';
 
 class home extends Component {
-    constructor() {
-        super();
-        this.state = {
-            posts: null
-        }
+    constructor(props) {
+        super(props);
+        this.state = { posts: null };
     }
 
-    componentDidMount() {
-        this.props.getPosts();
-    }
+    componentDidMount() { this.props.getPosts(); }
 
     render() {
         const { posts, loading } = this.props.data;
@@ -45,12 +41,8 @@ home.propTypes = {
     data: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state) => ({
-    data: state.data
-});
+const mapStateToProps = (state) => ({ data: state.data });
 
-const mapActionsToProps = {
-    getPosts
-}
+const mapActionsToProps = { getPosts }
 
 export default connect(mapStateToProps, mapActionsToProps)(home);

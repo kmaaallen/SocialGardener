@@ -17,8 +17,8 @@ const styles = theme => ({
 })
 
 class signup extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             email: '',
             password: '',
@@ -41,39 +41,25 @@ class signup extends Component {
         this.props.signUpUser(newUserData, this.props.history);
     };
 
-    static getDerivedStateFromProps(props, state) {
-        if (props.UI.errors) {
-            return {
-                errors: props.UI.errors
-            };
-        }
-        return null;
-    }
-
-
-    handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
+    handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }); }
 
     render() {
         const { classes, loading } = this.props;
         const { errors } = this.state;
         return (
-            <Grid container className={classes.form}>
+            <Grid container className={classes.textAlignCenter}>
                 <Grid item sm />
                 <Grid item md>
-                    <Typography variant="h4" className={classes.pageTitle}>Sign Up</Typography>
+                    <Typography variant="h4" className={classes.marginVertical15}>Sign Up</Typography>
                     <form noValidate onSubmit={this.handleSubmit}>
                         <TextField
                             id="email"
                             name="email"
                             label="Email"
                             type="email"
-                            helperText={errors.email}
+                            helperText={errors.email ? errors.email : ''}
                             error={errors.email ? true : false}
-                            className={classes.textField}
+                            className={classes.marginVertical15}
                             value={this.state.email}
                             onChange={this.handleChange}
                             fullWidth />
@@ -82,9 +68,9 @@ class signup extends Component {
                             name="password"
                             label="Password"
                             type="password"
-                            helperText={errors.password}
+                            helperText={errors.password ? errors.password : ''}
                             error={errors.password ? true : false}
-                            className={classes.textField}
+                            className={classes.marginVertical15}
                             value={this.state.password}
                             onChange={this.handleChange}
                             fullWidth />
@@ -93,9 +79,9 @@ class signup extends Component {
                             name="confirmPassword"
                             label="Confirm Password"
                             type="password"
-                            helperText={errors.confirmPassword}
+                            helperText={errors.confirmPassword ? errors.confirmPassword : ''}
                             error={errors.confirmPassword ? true : false}
-                            className={classes.textField}
+                            className={classes.marginVertical15}
                             value={this.state.confirmPassword}
                             onChange={this.handleChange}
                             fullWidth />
@@ -106,7 +92,7 @@ class signup extends Component {
                             type="text"
                             helperText={errors.username}
                             error={errors.username ? true : false}
-                            className={classes.textField}
+                            className={classes.marginVertical15}
                             value={this.state.userName}
                             onChange={this.handleChange}
                             fullWidth />
@@ -118,7 +104,7 @@ class signup extends Component {
                             className={classes.button}
                             disabled={loading}>
                             Sign Up
-                                {loading && (<CircularProgress size={20} className={classes.loader} color="secondary" />)}
+                                {loading && (<CircularProgress size={20} className={classes.positionAbsolute} color="secondary" />)}
                         </Button>
                     </form>
                     <p className={classes.signUpText}>Already have an account? <Link to="/login" className={classes.signUpLink}>Login here</Link></p>
@@ -141,8 +127,6 @@ const mapStateToProps = (state) => ({
     UI: state.UI
 });
 
-const mapActionsToProps = {
-    signUpUser
-}
+const mapActionsToProps = { signUpUser };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(signup));

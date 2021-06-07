@@ -20,10 +20,6 @@ const styles = {
     header: {
         flexGrow: 1,
         float: 'left',
-    },
-
-    right: {
-        float: 'right'
     }
 }
 
@@ -57,7 +53,6 @@ export class NavBar extends Component {
                 </Toolbar>
             </AppBar>
         );
-
         return links;
     }
 }
@@ -67,9 +62,6 @@ NavBar.propTypes = {
     classes: PropTypes.object.isRequired
 }
 
-const mapStateToProps = (state) => ({
-    authenticated: state.user.authenticated
-})
-
+const mapStateToProps = (state) => ({ authenticated: state.user.authenticated });
 
 export default connect(mapStateToProps)(withStyles(styles)(NavBar));

@@ -83,10 +83,6 @@ Post.propTypes = {
     openDialog: PropTypes.bool
 }
 
-const mapStateToProps = (state) => ({
-    user: state.user
-})
-
-
+const mapStateToProps = (state) => ({ user: state.user });
 
 export default connect(mapStateToProps)(withStyles(styles)(Post));

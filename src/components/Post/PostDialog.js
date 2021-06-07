@@ -81,10 +81,7 @@ class PostDialog extends Component {
 
     }
 
-    handleChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
-    }
-
+    handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }); }
 
     render() {
         const { classes,

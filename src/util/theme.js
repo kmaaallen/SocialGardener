@@ -21,6 +21,9 @@ export const theme = {
     }
   },
   classes: {
+    redText: {
+      color: '#8b0000'
+    },
     skeletonCard: {
       display: 'flex',
       marginBottom: 15
@@ -61,42 +64,28 @@ export const theme = {
       backgroundColor: '#444',
       marginBottom: 7
     },
-    form: {
+    textAlignCenter: {
       textAlign: 'center',
     },
-
-    pageTitle: {
+    marginVertical15: {
       margin: '15px 0px',
     },
-
-    textField: {
-      margin: '15px 0px',
-    },
-
     button: {
-      marginTop: '15px',
+      margin: '15px',
       position: 'relative'
     },
-
-    loader: {
-      position: 'absolute',
-    },
-
     generalError: {
       color: 'red',
       fontSize: '0.8em'
     },
-
     signUpText: {
       marginTop: '15px',
       fontSize: '0.8em'
     },
-
     signUpLink: {
       color: '#33691e',
       textDecoration: "underline"
     },
-
     invisibleSeparator: {
       border: 'none',
       margin: 4
@@ -105,6 +94,30 @@ export const theme = {
       width: '100%',
       border: '1px solid #ccc',
       marginBottom: '20px'
-    }
+    },
+    floatRight: {
+      float: 'right'
+    },
+    floatLeft: {
+      float: 'left'
+    },
+    positionAbsolute: {
+      position: 'absolute'
+    },
+    padding15: {
+      padding: '15px'
+    },
+    body2: {
+      fontSize: '0.875rem',
+      verticalAlign: 'super',
+      paddingLeft: '10px'
+    },
+    profileImage: {
+      width: '180px',
+      height: '180px',
+      borderRadius: '50%',
+      objectFit: 'cover',
+      marginTop: '15px'
+    },
   }
 }

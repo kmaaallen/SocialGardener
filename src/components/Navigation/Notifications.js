@@ -19,21 +19,17 @@ import { connect } from 'react-redux';
 import { markNotificationsRead } from '../../redux/actions/userActions';
 
 class Notifications extends Component {
-    state = {
-        anchorEl: null
+    constructor(props) {
+        super(props);
+        this.state = { anchorEl: null };
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.onMenuOpened = this.onMenuOpened.bind(this);
     }
 
-    handleOpen = (event) => {
-        this.setState({
-            anchorEl: event.target
-        });
-    }
+    handleOpen = (event) => { this.setState({ anchorEl: event.target }); }
 
-    handleClose = () => {
-        this.setState({
-            anchorEl: null
-        });
-    }
+    handleClose = () => { this.setState({ anchorEl: null }); }
 
     onMenuOpened = () => {
         let unreadNotificationIds = this.props.notifications
@@ -45,9 +41,7 @@ class Notifications extends Component {
     render() {
         const notifications = this.props.notifications;
         const anchorEl = this.state.anchorEl;
-
         dayjs.extend(relativeTime);
-
         let notificationIcon;
 
         if (notifications && notifications.length > 0) {
@@ -89,8 +83,6 @@ class Notifications extends Component {
         ) : (
             <MenuItem onClick={this.handleClose}>You have no notifications yet</MenuItem>
         )
-
-
         return (
             <Fragment>
                 <Tooltip placement="top" title="Notifications">
@@ -119,12 +111,8 @@ Notifications.propTypes = {
     notifications: PropTypes.array.isRequired
 }
 
-const mapStateToProps = (state) => ({
-    notifications: state.user.notifications
-})
+const mapStateToProps = (state) => ({ notifications: state.user.notifications });
 
-const mapActionsToProps = {
-    markNotificationsRead
-}
+const mapActionsToProps = { markNotificationsRead };
 
 export default connect(mapStateToProps, mapActionsToProps)(Notifications);

@@ -14,39 +14,26 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { connect } from 'react-redux';
 import { deletePost } from '../../redux/actions/dataActions';
 
-const styles = {
+const styles = theme => ({
     deleteButton: {
         paddingTop: 0,
         paddingRight: 0,
         float: "right"
-    },
-    red: {
-        color: "#8b0000"
     }
-}
+});
 
 class DeletePost extends Component {
-    constructor() {
-        super();
-        this.state = {
-            open: false
-        }
+    constructor(props) {
+        super(props);
+        this.state = { open: false };
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.deletePost = this.deletePost.bind(this);
     }
 
-    handleOpen = () => {
-        this.setState({
-            open: true
-        })
-    }
+    handleOpen = () => { this.setState({ open: true }) }
 
-    handleClose = () => {
-        this.setState({
-            open: false
-        })
-    }
+    handleClose = () => { this.setState({ open: false }) }
 
     deletePost = () => {
         this.props.deletePost(this.props.postId);
@@ -61,16 +48,16 @@ class DeletePost extends Component {
                     tip="Delete post"
                     onclick={this.handleOpen}
                     btnClass={classes.deleteButton}>
-                    <DeleteOutlineIcon className={classes.red} />
+                    <DeleteOutlineIcon className={classes.redText} />
                 </TooltipIconButton>
                 <Dialog open={this.state.open} onClose={this.handleClose} fullWidth maxWidth="sm">
                     <DialogTitle>Are you sure you want to delete this post?</DialogTitle>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary">Cancel</Button>
-                        <Button onClick={this.deletePost} className={classes.red}>Delete</Button>
+                        <Button onClick={this.deletePost} className={classes.redText}>Delete</Button>
                     </DialogActions>
                 </Dialog>
-            </Fragment>
+            </Fragment >
         )
     }
 }
@@ -81,4 +68,6 @@ DeletePost.propTypes = {
     postId: PropTypes.string.isRequired
 }
 
-export default connect(null, { deletePost })(withStyles(styles)(DeletePost))
+const mapActionsToProps = { deletePost }
+
+export default connect(null, mapActionsToProps)(withStyles(styles)(DeletePost))

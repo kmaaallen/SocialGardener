@@ -12,13 +12,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from 'react-redux';
 import { loginUser } from '../redux/actions/userActions';
 
-const styles = theme => ({
-    ...theme.classes
-});
+const styles = theme => ({ ...theme.classes });
 
 class login extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             email: '',
             password: '',
@@ -26,16 +24,6 @@ class login extends Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-    }
-
-
-    static getDerivedStateFromProps(props, state) {
-        if (props.UI.errors) {
-            return {
-                errors: props.UI.errors
-            };
-        }
-        return null;
     }
 
     handleSubmit = (event) => {
@@ -47,29 +35,25 @@ class login extends Component {
         this.props.loginUser(userData, this.props.history);
     }
 
-    handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
+    handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }); }
 
     render() {
         const { classes, UI: { loading } } = this.props;
         const { errors } = this.state;
         return (
-            <Grid container className={classes.form}>
+            <Grid container className={classes.textAlignCenter}>
                 <Grid item sm />
                 <Grid item md>
-                    <Typography variant="h4" className={classes.pageTitle}>Login</Typography>
+                    <Typography variant="h4" className={classes.marginVertical15}>Login</Typography>
                     <form noValidate onSubmit={this.handleSubmit}>
                         <TextField
                             id="email"
                             name="email"
                             label="Email"
                             type="email"
-                            helperText={errors.email}
+                            helperText={errors.email ? errors.email : ''}
                             error={errors.email ? true : false}
-                            className={classes.textField}
+                            className={classes.marginVertical15}
                             value={this.state.email}
                             onChange={this.handleChange}
                             fullWidth />
@@ -80,7 +64,7 @@ class login extends Component {
                             type="password"
                             helperText={errors.password}
                             error={errors.password ? true : false}
-                            className={classes.textField}
+                            className={classes.marginVertical15}
                             value={this.state.password}
                             onChange={this.handleChange}
                             fullWidth />
@@ -92,7 +76,7 @@ class login extends Component {
                             className={classes.button}
                             disabled={loading}>
                             Login
-                                {loading && (<CircularProgress size={20} className={classes.loader} color="secondary" />)}
+                                {loading && (<CircularProgress size={20} className={classes.positionAbsolute} color="secondary" />)}
                         </Button>
                     </form>
                     <p className={classes.signUpText}>Don't have an account? <Link to="/signup" className={classes.signUpLink}>Sign up here</Link></p>
@@ -115,8 +99,6 @@ const mapStateToProps = (state) => ({
     UI: state.UI
 });
 
-const mapActionsToProps = {
-    loginUser
-}
+const mapActionsToProps = { loginUser };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(login));

@@ -19,14 +19,6 @@ import { createPost, clearErrors } from '../../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.classes,
-    submitButton: {
-        position: 'relative',
-        marginTop: '15px',
-        float: 'right'
-    },
-    progressSpinner: {
-        position: 'absolute'
-    },
     closeButton: {
         position: 'absolute',
         left: '90%',
@@ -35,12 +27,9 @@ const styles = theme => ({
 });
 
 class CreatePost extends Component {
-    constructor() {
-        super();
-        this.state = {
-            open: false,
-            content: ''
-        }
+    constructor(props) {
+        super(props);
+        this.state = { open: false, content: '' };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleOpen = this.handleOpen.bind(this);
@@ -48,39 +37,24 @@ class CreatePost extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.data.posts !== this.props.data.posts && this.state.open) {
-            this.handleClose();
-        }
+        if (prevProps.data.posts !== this.props.data.posts && this.state.open) { this.handleClose(); }
     }
 
-    handleOpen = () => {
-        this.setState({
-            open: true
-        })
-    }
+    handleOpen = () => { this.setState({ open: true }) }
 
     handleClose = () => {
         this.props.clearErrors();
-        this.setState({
-            open: false,
-            content: ''
-        })
+        this.setState({ open: false, content: '' })
     }
 
-    handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
+    handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }); }
 
     handleSubmit = (event) => {
         event.preventDefault();
         this.props.createPost({ content: this.state.content });
-
     }
 
     render() {
-        //const { errors } = this.state;
         const { classes, UI: { loading, errors } } = this.props;
         return (
             <Fragment>
@@ -104,17 +78,17 @@ class CreatePost extends Component {
                                 placeholder="Type your post here"
                                 error={errors ? true : false}
                                 helperText={errors ? errors.content : ''}
-                                className={classes.TextField}
+                                className={classes.marginVertical15}
                                 onChange={this.handleChange} />
                             <Button
                                 type="submit"
                                 variant="contained"
                                 color="primary"
-                                className={classes.submitButton}
+                                className={classes.button + ' ' + classes.floatRight}
                                 disabled={loading}>
                                 {loading && (<CircularProgress
                                     size={30}
-                                    className={classes.progressSpinner} />)}
+                                    className={classes.positionAbsolute} />)}
                                     Submit
                                 </Button>
                         </form>

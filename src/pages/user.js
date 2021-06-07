@@ -12,31 +12,25 @@ import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { getUserData } from '../redux/actions/dataActions';
 
-class user extends Component {
-    state = {
-        profile: null,
-        postIdParam: null
+class User extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            profile: null,
+            postIdParam: null
+        }
     }
+
     componentDidMount = () => {
         const user = this.props.match.params.userName;
         const postIdParam = this.props.match.params.postId;
 
-        if (postIdParam) {
-            this.setState({
-                postIdParam: postIdParam
-            });
-        }
+        if (postIdParam) { this.setState({ postIdParam: postIdParam }); }
 
         this.props.getUserData(user);
         axios.get(`/user/${user}`)
-            .then(response => {
-                this.setState({
-                    profile: response.data.user
-                })
-            })
-            .catch(error => {
-                console.error(error);
-            })
+            .then(response => { this.setState({ profile: response.data.user }) })
+            .catch(error => { console.error(error); })
     }
 
     render() {
@@ -74,17 +68,13 @@ class user extends Component {
     }
 }
 
-user.propTypes = {
+User.propTypes = {
     data: PropTypes.object.isRequired,
     getUserData: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => ({
-    data: state.data
-})
+const mapStateToProps = (state) => ({ data: state.data });
 
-const mapActionsToProps = {
-    getUserData
-}
+const mapActionsToProps = { getUserData };
 
-export default connect(mapStateToProps, mapActionsToProps)(user)
+export default connect(mapStateToProps, mapActionsToProps)(User)

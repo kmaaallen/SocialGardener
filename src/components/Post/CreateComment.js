@@ -11,23 +11,17 @@ import { createComment } from '../../redux/actions/dataActions';
 
 const styles = (theme) => ({
     ...theme.classes,
-
-    button: {
-        float: 'right',
-        margin: '15px'
-    }
 })
 
 class CreateComment extends Component {
-    state = {
-        content: ''
+    constructor(props) {
+        super(props);
+        this.state = { content: '' };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
+    handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }); }
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -48,13 +42,13 @@ class CreateComment extends Component {
                         value={this.state.content}
                         onChange={this.handleChange}
                         fullWidth
-                        className={classes.Textfield}
+                        className={classes.marginVertical15}
                     />
                     <Button
                         type="submit"
                         variant="contained"
                         color="primary"
-                        className={classes.button}>
+                        className={classes.button + ' ' + classes.floatRight}>
                         Submit
                         </Button>
                     <hr className={classes.visibleSeparator} />
@@ -83,9 +77,7 @@ const mapStateToProps = (state) => ({
     authenticated: state.user.authenticated,
 })
 
-const mapActionsToProps = {
-    createComment
-}
+const mapActionsToProps = { createComment };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(CreateComment));
 

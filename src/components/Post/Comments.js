@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
     ...theme.classes,
-
     commentImage: {
         width: '80px',
         height: '80px',
@@ -21,7 +20,6 @@ const styles = theme => ({
         marginTop: '15px',
         marginBottom: '15px'
     }
-
 })
 
 class Comments extends Component {
@@ -70,8 +68,6 @@ class Comments extends Component {
     }
 }
 
-Comments.propTypes = {
-    comments: PropTypes.array.isRequired
-}
+Comments.propTypes = { comments: PropTypes.array.isRequired };
 
 export default withStyles(styles)(Comments);

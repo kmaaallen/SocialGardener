@@ -16,19 +16,23 @@ import Edit from '@material-ui/icons/Edit';
 import { connect } from 'react-redux';
 import { editUserDetails } from '../../redux/actions/userActions';
 
-const styles = {
-    right: {
-        float: 'right'
-    }
-};
+const styles = theme => ({
+    ...theme.classes
+})
 
 class EditDetails extends Component {
-    state = {
-        bio: '',
-        location: '',
-        open: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            bio: '',
+            location: '',
+            open: false
+        };
+        this.mapUserDetailsToState = this.mapUserDetailsToState.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
-    //TODO: WHY TWO CREDENTIALS IN USER
 
     mapUserDetailsToState = (details) => {
         this.setState({
@@ -43,22 +47,12 @@ class EditDetails extends Component {
 
     handleOpen = () => {
         this.mapUserDetailsToState(this.props.details);
-        this.setState({
-            open: true
-        })
+        this.setState({ open: true })
     }
 
-    handleClose = () => {
-        this.setState({
-            open: false
-        })
-    }
+    handleClose = () => { this.setState({ open: false }) }
 
-    handleChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
+    handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }); }
 
     handleSave = () => {
         const userDetails = {
@@ -75,7 +69,7 @@ class EditDetails extends Component {
             <Fragment>
                 <TooltipIconButton
                     tip="Edit Details"
-                    btnClass={classes.right}
+                    btnClass={classes.floatRight}
                     onclick={this.handleOpen}>
                     <Edit color="primary" />
                 </TooltipIconButton>
@@ -90,7 +84,7 @@ class EditDetails extends Component {
                                 multiline
                                 fullWidth
                                 placeholder="A short bio about yourself"
-                                className={classes.textField}
+                                className={classes.marginVertical15}
                                 value={this.state.bio}
                                 onChange={this.handleChange} />
                             <TextField
@@ -99,7 +93,7 @@ class EditDetails extends Component {
                                 label="Location"
                                 fullWidth
                                 placeholder="Location"
-                                className={classes.textField}
+                                className={classes.marginVertical15}
                                 value={this.state.location}
                                 onChange={this.handleChange} />
                         </form>
@@ -119,12 +113,8 @@ EditDetails.propTypes = {
     classes: PropTypes.object.isRequired,
 }
 
-const mapStateToProps = (state) => ({
-    details: state.user.credentials
-});
+const mapStateToProps = (state) => ({ details: state.user.credentials });
 
-const mapActionsToProps = {
-    editUserDetails
-}
+const mapActionsToProps = { editUserDetails };
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(EditDetails))

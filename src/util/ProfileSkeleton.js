@@ -33,8 +33,6 @@ const PostSkeleton = (props) => {
     )
 }
 
-PostSkeleton.propTypes = {
-    classes: PropTypes.object.isRequired
-}
+PostSkeleton.propTypes = { classes: PropTypes.object.isRequired };
 
 export default withStyles(styles)(PostSkeleton);
