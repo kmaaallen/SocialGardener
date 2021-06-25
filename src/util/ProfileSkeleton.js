@@ -12,6 +12,9 @@ const styles = (theme) => ({
     auto: {
         marginLeft: 'auto',
         marginRight: 'auto',
+    },
+    widthOverride: {
+        width: '100%',
     }
 });
 
@@ -21,7 +24,7 @@ const PostSkeleton = (props) => {
     return (
         <Fragment>
             <Card className={classes.skeletonCard}>
-                <CardContent className={classes.skeletonContent}>
+                <CardContent className={classes.skeletonContent + ' ' + classes.widthOverride}>
                     <CardMedia className={classes.skeletonCover} image={noImage} />
                     <div className={classes.skeletonUserName + ' ' + classes.auto} />
                     <div className={classes.skeletonFullLine} />
