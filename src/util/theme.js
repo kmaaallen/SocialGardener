@@ -34,11 +34,11 @@ export const theme = {
       padding: 25
     },
     skeletonCover: {
-      minWidth: '150px',
+      width: '150px',
       minHeight: '150px',
       borderRadius: '50%',
       objectFit: 'cover',
-      margin: '15px',
+      margin: '15px auto',
     },
     skeletonUserName: {
       width: '60px',
