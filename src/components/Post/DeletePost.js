@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { deletePost } from '../../redux/actions/dataActions';
 
 const styles = theme => ({
+    ...theme.classes,
     deleteButton: {
         paddingTop: 0,
         paddingRight: 0,
