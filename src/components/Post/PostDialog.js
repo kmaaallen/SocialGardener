@@ -78,7 +78,6 @@ class PostDialog extends Component {
         this.setState({ open: false });
         window.history.pushState(null, null, this.state.oldPath);
         this.props.clearErrors();
-
     }
 
     handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }); }
