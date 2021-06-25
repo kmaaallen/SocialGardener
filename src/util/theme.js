@@ -29,9 +29,10 @@ export const theme = {
       marginBottom: 15
     },
     skeletonContent: {
-      width: '100%',
+      width: '60%',
       flexDirection: 'column',
-      padding: 25
+      padding: '25px 15px',
+      margin: 'auto'
     },
     skeletonCover: {
       width: '150px',

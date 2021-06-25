@@ -114,7 +114,7 @@ class PostDialog extends Component {
                     </TooltipIconButton>
                     <span>{commentCount} comments</span>
                 </Grid>
-                <hr className={classes.visibleSeparator} />
+                <hr className={classes.invisibleSeparator} />
                 <CreateComment postId={postId} />
                 <Comments comments={comments} />
             </Grid>
