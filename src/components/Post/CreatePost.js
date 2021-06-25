@@ -23,6 +23,9 @@ const styles = theme => ({
         position: 'absolute',
         left: '90%',
         top: '5%'
+    },
+    bottomMargin: {
+        marginBottom: '15px'
     }
 });
 
@@ -71,6 +74,7 @@ class CreatePost extends Component {
                             <TextField
                                 name="content"
                                 type="text"
+                                variant="outlined"
                                 label="Post"
                                 multiline
                                 fullWidth
@@ -84,13 +88,13 @@ class CreatePost extends Component {
                                 type="submit"
                                 variant="contained"
                                 color="primary"
-                                className={classes.button + ' ' + classes.floatRight}
+                                className={classes.bottomMargin + ' ' + classes.floatRight}
                                 disabled={loading}>
                                 {loading && (<CircularProgress
                                     size={30}
                                     className={classes.positionAbsolute} />)}
-                                    Submit
-                                </Button>
+                                Submit
+                            </Button>
                         </form>
                     </DialogContent>
                 </Dialog>

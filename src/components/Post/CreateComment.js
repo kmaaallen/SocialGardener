@@ -36,6 +36,7 @@ class CreateComment extends Component {
                     <TextField
                         name="content"
                         type="text"
+                        variant="outlined"
                         label="Comment on post"
                         error={errors ? true : false}
                         helperText={errors ? errors.comment : ''}
@@ -48,16 +49,16 @@ class CreateComment extends Component {
                         type="submit"
                         variant="contained"
                         color="primary"
-                        className={classes.button + ' ' + classes.floatRight}>
+                        className={classes.floatRight}>
                         Submit
-                        </Button>
-                    <hr className={classes.visibleSeparator} />
+                    </Button>
+                    <hr className={classes.invisibleSeparator} />
                 </form>
             </Grid>
         );
         return (
             <Fragment>
-                { commentFormMarkup}
+                {commentFormMarkup}
             </Fragment>
 
         )
