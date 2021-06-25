@@ -23,6 +23,8 @@ import AuthRoute from './util/AuthRoute';
 
 const theme = createMuiTheme(themeFile);
 
+axios.defaults.baseURL = "https://europe-west1-socialgardener.cloudfunctions.net/api";
+
 const token = localStorage.FBIdToken;
 if (token) {
   const decodedToken = jwtDecode(token);
