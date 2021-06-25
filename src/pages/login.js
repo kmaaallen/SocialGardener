@@ -11,6 +11,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 //Redux
 import { connect } from 'react-redux';
 import { loginUser } from '../redux/actions/userActions';
+import { clearErrors } from '../redux/actions/dataActions';
 
 const styles = theme => ({ ...theme.classes });
 
@@ -19,12 +20,13 @@ class login extends Component {
         super(props);
         this.state = {
             email: '',
-            password: '',
-            errors: {}
+            password: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
+
+    componentDidMount() { this.props.clearErrors(); }
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -38,8 +40,7 @@ class login extends Component {
     handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }); }
 
     render() {
-        const { classes, UI: { loading } } = this.props;
-        const { errors } = this.state;
+        const { classes, UI: { loading, errors } } = this.props;
         return (
             <Grid container className={classes.textAlignCenter}>
                 <Grid item sm />
@@ -51,8 +52,8 @@ class login extends Component {
                             name="email"
                             label="Email"
                             type="email"
-                            helperText={errors.email ? errors.email : ''}
-                            error={errors.email ? true : false}
+                            error={errors && errors.email ? true : false}
+                            helperText={errors && errors.email ? errors.email : ''}
                             className={classes.marginVertical15}
                             value={this.state.email}
                             onChange={this.handleChange}
@@ -62,13 +63,13 @@ class login extends Component {
                             name="password"
                             label="Password"
                             type="password"
-                            helperText={errors.password}
-                            error={errors.password ? true : false}
+                            error={errors && errors.password ? true : false}
+                            helperText={errors && errors.password ? errors.password : ''}
                             className={classes.marginVertical15}
                             value={this.state.password}
                             onChange={this.handleChange}
                             fullWidth />
-                        {errors.general && (<Typography variant="body2" className={classes.generalError}>{errors.general}</Typography>)}
+                        {(errors && errors.general) && (<Typography variant="body2" className={classes.generalError}>{errors.general}</Typography>)}
                         <Button
                             type="submit"
                             variant="contained"
@@ -76,7 +77,7 @@ class login extends Component {
                             className={classes.button}
                             disabled={loading}>
                             Login
-                                {loading && (<CircularProgress size={20} className={classes.positionAbsolute} color="secondary" />)}
+                            {loading && (<CircularProgress size={20} className={classes.positionAbsolute} color="secondary" />)}
                         </Button>
                     </form>
                     <p className={classes.signUpText}>Don't have an account? <Link to="/signup" className={classes.signUpLink}>Sign up here</Link></p>
@@ -91,7 +92,8 @@ login.propTypes = {
     classes: PropTypes.object.isRequired,
     loginUser: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
-    UI: PropTypes.object.isRequired
+    UI: PropTypes.object.isRequired,
+    clearErrors: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
@@ -99,6 +101,9 @@ const mapStateToProps = (state) => ({
     UI: state.UI
 });
 
-const mapActionsToProps = { loginUser };
+const mapActionsToProps = {
+    loginUser,
+    clearErrors
+};
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(login));

@@ -11,6 +11,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 //Redux
 import { connect } from 'react-redux';
 import { signUpUser } from '../redux/actions/userActions';
+import { clearErrors } from '../redux/actions/dataActions';
 
 const styles = theme => ({
     ...theme.classes
@@ -24,11 +25,12 @@ class signup extends Component {
             password: '',
             confirmPassword: '',
             userName: '',
-            errors: {}
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
+
+    componentDidMount() { this.props.clearErrors(); }
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -44,8 +46,7 @@ class signup extends Component {
     handleChange = (event) => { this.setState({ [event.target.name]: event.target.value }); }
 
     render() {
-        const { classes, loading } = this.props;
-        const { errors } = this.state;
+        const { classes, UI: { loading, errors } } = this.props;
         return (
             <Grid container className={classes.textAlignCenter}>
                 <Grid item sm />
@@ -57,8 +58,8 @@ class signup extends Component {
                             name="email"
                             label="Email"
                             type="email"
-                            helperText={errors.email ? errors.email : ''}
-                            error={errors.email ? true : false}
+                            error={errors && errors.email ? true : false}
+                            helperText={errors && errors.email ? errors.email : ''}
                             className={classes.marginVertical15}
                             value={this.state.email}
                             onChange={this.handleChange}
@@ -68,8 +69,8 @@ class signup extends Component {
                             name="password"
                             label="Password"
                             type="password"
-                            helperText={errors.password ? errors.password : ''}
-                            error={errors.password ? true : false}
+                            error={errors && errors.password ? true : false}
+                            helperText={errors && errors.password ? errors.password : ''}
                             className={classes.marginVertical15}
                             value={this.state.password}
                             onChange={this.handleChange}
@@ -79,8 +80,8 @@ class signup extends Component {
                             name="confirmPassword"
                             label="Confirm Password"
                             type="password"
-                            helperText={errors.confirmPassword ? errors.confirmPassword : ''}
-                            error={errors.confirmPassword ? true : false}
+                            error={errors && errors.confirmPassword ? true : false}
+                            helperText={errors && errors.confirmPassword ? errors.confirmPassword : ''}
                             className={classes.marginVertical15}
                             value={this.state.confirmPassword}
                             onChange={this.handleChange}
@@ -90,13 +91,13 @@ class signup extends Component {
                             name="userName"
                             label="User Name"
                             type="text"
-                            helperText={errors.username}
-                            error={errors.username ? true : false}
+                            error={errors && errors.username ? true : false}
+                            helperText={errors && errors.username ? errors.username : ''}
                             className={classes.marginVertical15}
                             value={this.state.userName}
                             onChange={this.handleChange}
                             fullWidth />
-                        {errors.general && (<Typography variant="body2" className={classes.generalError}>{errors.general}</Typography>)}
+                        {(errors && errors.general) && (<Typography variant="body2" className={classes.generalError}>{errors.general}</Typography>)}
                         <Button
                             type="submit"
                             variant="contained"
@@ -104,7 +105,7 @@ class signup extends Component {
                             className={classes.button}
                             disabled={loading}>
                             Sign Up
-                                {loading && (<CircularProgress size={20} className={classes.positionAbsolute} color="secondary" />)}
+                            {loading && (<CircularProgress size={20} className={classes.positionAbsolute} color="secondary" />)}
                         </Button>
                     </form>
                     <p className={classes.signUpText}>Already have an account? <Link to="/login" className={classes.signUpLink}>Login here</Link></p>
@@ -120,13 +121,17 @@ signup.propTypes = {
     user: PropTypes.object.isRequired,
     UI: PropTypes.object.isRequired,
     signUpUser: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
     user: state.user,
-    UI: state.UI
+    UI: state.UI,
 });
 
-const mapActionsToProps = { signUpUser };
+const mapActionsToProps = {
+    signUpUser,
+    clearErrors
+};
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(signup));
